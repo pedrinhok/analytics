@@ -5,11 +5,13 @@ var io = require('socket.io')(http);
 var path = require('path');
 var config = require('./config.js');
 
-var visitorsData = {};
+var visitors = {};
 
 app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static(path.join(__dirname, 'public/')));
+
+app.use('scripts/', express.static(path.join(__dirname, 'node_modules/')));
 
 app.get(/\/(about|contact)?$/, function(req, res) {
   res.sendFile(path.join(__dirname, 'views/index.html'));
@@ -27,13 +29,13 @@ io.on('connection', function(socket) {
   }
 
   socket.on('visitor-data', function(data) {
-    visitorsData[socket.id] = data;
+    visitors[socket.id] = data;
 
     io.emit('updated-stats', computeStats());
   });
 
   socket.on('disconnect', function() {
-    delete visitorsData[socket.id];
+    delete visitors[socket.id];
 
     io.emit('updated-stats', computeStats());
   });
@@ -42,15 +44,15 @@ io.on('connection', function(socket) {
 
 function computeStats(){
   return {
-    pages: computePageCounts(),
+    activePages: computePageCounts(),
     activeUsers: getActiveUsers()
   };
 }
 
 function computePageCounts() {
   var pageCounts = {};
-  for (var key in visitorsData) {
-    var page = visitorsData[key].page;
+  for (var key in visitors) {
+    var page = visitors[key].page;
     if (page in pageCounts) {
       pageCounts[page]++;
     } else {
@@ -61,7 +63,7 @@ function computePageCounts() {
 }
 
 function getActiveUsers() {
-  return Object.keys(visitorsData).length;
+  return Object.keys(visitors).length;
 }
 
 http.listen(app.get('port'), function() {
