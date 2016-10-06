@@ -5,13 +5,13 @@ var io = require('socket.io')(http);
 var path = require('path');
 var config = require('./config.js');
 
-var visitors = {};
+var visitors = {}, history = {};
 
 app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static(path.join(__dirname, 'public/')));
 
-app.use('scripts/', express.static(path.join(__dirname, 'node_modules/')));
+app.use('/scripts', express.static(path.join(__dirname, 'node_modules/')));
 
 app.get(/\/(about|contact)?$/, function(req, res) {
   res.sendFile(path.join(__dirname, 'views/index.html'));
@@ -30,13 +30,15 @@ io.on('connection', function(socket) {
 
   socket.on('visitor-data', function(data) {
     visitors[socket.id] = data;
-
+    if(history[data.ip] == undefined)
+      history[data.ip] = { city: data.city, pages: [] }
+    if(history[data.ip].pages.indexOf(data.page) < 0)
+      history[data.ip].pages.push(data.page)
     io.emit('updated-stats', computeStats());
   });
 
   socket.on('disconnect', function() {
     delete visitors[socket.id];
-
     io.emit('updated-stats', computeStats());
   });
 
@@ -45,7 +47,8 @@ io.on('connection', function(socket) {
 function computeStats(){
   return {
     activePages: computePageCounts(),
-    activeUsers: getActiveUsers()
+    activeUsers: getActiveUsers(), 
+    usersHistory: history, 
   };
 }
 

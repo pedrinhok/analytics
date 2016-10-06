@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Real-Time Web Analytics Dashboard - coligo</title>
+  <title>Real-Time Analyics</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -46,7 +46,23 @@
               </tbody>
             </table>
           </div>
-
+          <h2 class="sub-header">Users History</h2>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <td>IP</td>
+                <td>City</td>
+                <td>Accessed Pages</td>
+              </thead>
+              <tbody>
+                <tr v-for="(ip, user) in usersHistory">
+                  <td>{{ ip }}</td>
+                  <td>{{ user.city }}</td>
+                  <td>{{ user.pages }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </div>
