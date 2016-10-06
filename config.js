@@ -1,4 +1,4 @@
 module.exports = {
-	host: "localhost:5000",
+	host: "localhost:3000",
 	dashboardEndpoint: "/dashboard"
 }

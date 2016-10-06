@@ -8,33 +8,14 @@
 	<title>Real-Time Analyics</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<style>
-		body {
-			background-color: #F2F2F0;
-		}
-
-		.navbar {
-			background-color: #373737;
-			padding: 5px;
-		}
-
-		.navbar a {
-			color: #8C8C8C;
-			font-size: 1.5em;
-		}
-
-		.coligo {
-			color: #D0D0D0;
-			font-size: 0.8em;
-		}
-	</style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 	<nav class="navbar navbar-inverse" style="border-radius: 0px;">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Real-Time Analytics<span class="coligo"> | COLIGO.IO</span></a>
+				<a class="navbar-brand" href="/">Real-Time Analytics<span class="page"> | HOME</span></a>
 			</div>
 		</div>
 	</nav>
@@ -52,6 +33,7 @@
 		</div>
 	</div>
 
+	<script src="scripts/jquery/dist/jquery.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io();
