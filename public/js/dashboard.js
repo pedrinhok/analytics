@@ -11,7 +11,7 @@ var vm = new Vue({
     socket.on('updated-stats', function(data) {
 			this.activePages = data.activePages;
 			this.activeUsers = data.activeUsers;
-      this.usersHistory = usersHistory;
+      this.usersHistory = data.usersHistory;
     }.bind(this));
   }
 });
