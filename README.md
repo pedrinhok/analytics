@@ -1,2 +1,2 @@
 # analytics
-Real Time Analytics Dashboard
+Real Time Analytics Dashboard, developed with node and express
