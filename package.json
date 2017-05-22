@@ -1,7 +1,7 @@
 {
-  "name": "real-time-analytics",
+  "name": "analytics",
   "version": "1.0.0",
-  "description": "A real-time analytics dashboard with NodeJs, Socket.io, and Vue.js",
+  "description": "Real Time Analytics Dashboard, developed with node, express and socket.io",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
     "real-time",
     "analytics"
   ],
-  "author": "Fady Makram",
+  "author": "Pedro Kayser",
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.4",
